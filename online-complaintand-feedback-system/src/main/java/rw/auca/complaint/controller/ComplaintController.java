@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rw.auca.complaint.model.Complaint;
+import rw.auca.complaint.model.ComplaintStatus;
 import rw.auca.complaint.service.ComplaintService;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,6 +37,20 @@ public class ComplaintController {
     @GetMapping("/all")
     public ResponseEntity<List<Complaint>> getAll() {
         return new ResponseEntity<>(complaintService.getAll(), HttpStatus.OK);
+    }
+
+    // B2
+    @GetMapping("/by-status")
+    public ResponseEntity<List<Complaint>> getByStatus(@RequestParam ComplaintStatus status) {
+        return new ResponseEntity<>(complaintService.getByStatus(status), HttpStatus.OK);
+    }
+
+    // B3
+    @GetMapping("/between")
+    public ResponseEntity<List<Complaint>> getBetween(@RequestParam String start, @RequestParam String end) {
+        LocalDate startDate = LocalDate.parse(start);
+        LocalDate endDate = LocalDate.parse(end);
+        return new ResponseEntity<>(complaintService.getBetween(startDate, endDate), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

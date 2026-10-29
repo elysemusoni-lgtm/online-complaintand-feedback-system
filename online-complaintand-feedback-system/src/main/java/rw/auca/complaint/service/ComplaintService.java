@@ -3,8 +3,10 @@ package rw.auca.complaint.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import rw.auca.complaint.model.Complaint;
+import rw.auca.complaint.model.ComplaintStatus;
 import rw.auca.complaint.repository.ComplaintRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,6 +24,16 @@ public class ComplaintService {
 
     public List<Complaint> getAll() {
         return complaintRepository.findAll();
+    }
+
+    // B2
+    public List<Complaint> getByStatus(ComplaintStatus status) {
+        return complaintRepository.findByStatusOrderByFiledDateAsc(status);
+    }
+
+    // B3
+    public List<Complaint> getBetween(LocalDate start, LocalDate end) {
+        return complaintRepository.findByFiledDateBetweenOrderByFiledDateAsc(start, end);
     }
 
     public Optional<Complaint> getById(UUID id) {

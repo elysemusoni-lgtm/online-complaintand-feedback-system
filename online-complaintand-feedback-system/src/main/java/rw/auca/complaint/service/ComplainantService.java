@@ -24,6 +24,11 @@ public class ComplainantService {
         return complainantRepository.findAll();
     }
 
+    // B1
+    public List<Complainant> getByOrganisation(String organisation) {
+        return complainantRepository.findByOrganisationIgnoreCaseOrderByLastNameAsc(organisation);
+    }
+
     public Optional<Complainant> getById(UUID id) {
         return complainantRepository.findById(id);
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rw.auca.complaint.model.Complainant;
 import rw.auca.complaint.service.ComplainantService;
@@ -34,6 +35,12 @@ public class ComplainantController {
     @GetMapping("/all")
     public ResponseEntity<List<Complainant>> getAll() {
         return new ResponseEntity<>(complainantService.getAll(), HttpStatus.OK);
+    }
+
+    // B1
+    @GetMapping("/by-organisation")
+    public ResponseEntity<List<Complainant>> getByOrganisation(@RequestParam String organisation) {
+        return new ResponseEntity<>(complainantService.getByOrganisation(organisation), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
