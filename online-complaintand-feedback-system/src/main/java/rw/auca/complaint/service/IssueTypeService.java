@@ -24,6 +24,11 @@ public class IssueTypeService {
         return issueTypeRepository.findAll();
     }
 
+    // C3
+    public List<IssueType> getUnused() {
+        return issueTypeRepository.findUnusedIssueTypes();
+    }
+
     public Optional<IssueType> getById(UUID id) {
         return issueTypeRepository.findById(id);
     }

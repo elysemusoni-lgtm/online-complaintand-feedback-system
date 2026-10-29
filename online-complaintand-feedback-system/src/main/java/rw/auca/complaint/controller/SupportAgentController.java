@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rw.auca.complaint.model.SupportAgent;
 import rw.auca.complaint.service.SupportAgentService;
@@ -34,6 +35,12 @@ public class SupportAgentController {
     @GetMapping("/all")
     public ResponseEntity<List<SupportAgent>> getAll() {
         return new ResponseEntity<>(supportAgentService.getAll(), HttpStatus.OK);
+    }
+
+    // C1
+    @GetMapping("/by-issue-type")
+    public ResponseEntity<List<SupportAgent>> getByIssueType(@RequestParam String name) {
+        return new ResponseEntity<>(supportAgentService.getByIssueType(name), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

@@ -36,6 +36,12 @@ public class HelpDeskController {
         return new ResponseEntity<>(helpDeskService.getAll(), HttpStatus.OK);
     }
 
+    // C2
+    @GetMapping("/free")
+    public ResponseEntity<List<HelpDesk>> getFree() {
+        return new ResponseEntity<>(helpDeskService.getFree(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable UUID id) {
         Optional<HelpDesk> found = helpDeskService.getById(id);

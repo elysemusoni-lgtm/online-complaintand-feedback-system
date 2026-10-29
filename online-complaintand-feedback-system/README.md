@@ -19,3 +19,4 @@ Built with Spring Boot 3, Spring Data JPA and PostgreSQL (Java 17, Maven).
 
 - Part A: domain model and CRUD (done)
 - Part B: derived queries (done)
+- Part C: JPQL with joins (done)

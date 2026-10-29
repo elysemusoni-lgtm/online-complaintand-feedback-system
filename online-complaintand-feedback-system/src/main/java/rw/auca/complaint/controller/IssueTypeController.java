@@ -36,6 +36,12 @@ public class IssueTypeController {
         return new ResponseEntity<>(issueTypeService.getAll(), HttpStatus.OK);
     }
 
+    // C3
+    @GetMapping("/unused")
+    public ResponseEntity<List<IssueType>> getUnused() {
+        return new ResponseEntity<>(issueTypeService.getUnused(), HttpStatus.OK);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getById(@PathVariable UUID id) {
         Optional<IssueType> found = issueTypeService.getById(id);

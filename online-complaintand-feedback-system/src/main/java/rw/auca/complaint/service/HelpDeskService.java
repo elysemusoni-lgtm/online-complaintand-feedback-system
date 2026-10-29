@@ -24,6 +24,11 @@ public class HelpDeskService {
         return helpDeskRepository.findAll();
     }
 
+    // C2
+    public List<HelpDesk> getFree() {
+        return helpDeskRepository.findFreeHelpDesks();
+    }
+
     public Optional<HelpDesk> getById(UUID id) {
         return helpDeskRepository.findById(id);
     }

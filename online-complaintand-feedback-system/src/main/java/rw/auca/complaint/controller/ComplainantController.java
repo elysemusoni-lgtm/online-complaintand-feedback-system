@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rw.auca.complaint.model.Complainant;
 import rw.auca.complaint.service.ComplainantService;
+import rw.auca.complaint.service.SupportAgentService;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +26,9 @@ public class ComplainantController {
 
     @Autowired
     private ComplainantService complainantService;
+
+    @Autowired
+    private SupportAgentService supportAgentService;
 
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Complainant complainant) {
@@ -41,6 +45,15 @@ public class ComplainantController {
     @GetMapping("/by-organisation")
     public ResponseEntity<List<Complainant>> getByOrganisation(@RequestParam String organisation) {
         return new ResponseEntity<>(complainantService.getByOrganisation(organisation), HttpStatus.OK);
+    }
+
+    // C4
+    @GetMapping("/of-support-agent/{supportAgentId}")
+    public ResponseEntity<Object> getBySupportAgent(@PathVariable UUID supportAgentId) {
+        if (supportAgentService.getById(supportAgentId).isEmpty()) {
+            return new ResponseEntity<>("The support agent with that id does not exist", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(complainantService.getBySupportAgent(supportAgentId), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

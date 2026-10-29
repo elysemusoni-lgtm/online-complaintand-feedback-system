@@ -24,6 +24,11 @@ public class SupportAgentService {
         return supportAgentRepository.findAll();
     }
 
+    // C1
+    public List<SupportAgent> getByIssueType(String name) {
+        return supportAgentRepository.findByIssueTypeName(name);
+    }
+
     public Optional<SupportAgent> getById(UUID id) {
         return supportAgentRepository.findById(id);
     }

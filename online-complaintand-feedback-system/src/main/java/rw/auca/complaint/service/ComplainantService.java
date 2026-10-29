@@ -29,6 +29,11 @@ public class ComplainantService {
         return complainantRepository.findByOrganisationIgnoreCaseOrderByLastNameAsc(organisation);
     }
 
+    // C4
+    public List<Complainant> getBySupportAgent(UUID supportAgentId) {
+        return complainantRepository.findBySupportAgentId(supportAgentId);
+    }
+
     public Optional<Complainant> getById(UUID id) {
         return complainantRepository.findById(id);
     }
