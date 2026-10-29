@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,7 +32,13 @@ public class ComplaintController {
     @PostMapping("/save")
     public ResponseEntity<String> save(@RequestBody Complaint complaint) {
         String message = complaintService.save(complaint);
-        return new ResponseEntity<>(message, HttpStatus.CREATED);
+        if (message.equals("Complaint date cannot be in the past")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
+        } else if (message.equals("Support agent already has a complaint assigned on that date")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.CREATED);
+        }
     }
 
     @GetMapping("/all")
@@ -68,6 +75,19 @@ public class ComplaintController {
         String message = complaintService.update(id, complaint);
         if (message.contains("does not exist")) {
             return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+    }
+
+    // D2
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<String> changeStatus(@PathVariable UUID id, @RequestParam ComplaintStatus status) {
+        String message = complaintService.changeStatus(id, status);
+        if (message.contains("does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else if (message.startsWith("Cannot change status")) {
+            return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(message, HttpStatus.OK);
         }

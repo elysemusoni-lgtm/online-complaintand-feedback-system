@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import rw.auca.complaint.model.HelpDesk;
 import rw.auca.complaint.model.SupportAgent;
 
 import java.util.List;
@@ -16,4 +17,7 @@ public interface SupportAgentRepository extends JpaRepository<SupportAgent, UUID
     @Query("SELECT DISTINCT a FROM SupportAgent a JOIN a.issueTypes t "
             + "WHERE LOWER(t.name) LIKE LOWER(CONCAT('%', :name, '%'))")
     List<SupportAgent> findByIssueTypeName(@Param("name") String name);
+
+    // D4: derived query, is this help desk already occupied by a support agent
+    boolean existsByHelpDesk(HelpDesk helpDesk);
 }

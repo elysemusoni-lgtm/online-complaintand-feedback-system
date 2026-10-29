@@ -17,4 +17,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, UUID> {
 
     // B3: derived query, both dates inclusive, ordered by filedDate
     List<Complaint> findByFiledDateBetweenOrderByFiledDateAsc(LocalDate start, LocalDate end);
+
+    // D1: derived query, does this support agent already have a complaint on that date that is not WITHDRAWN
+    boolean existsBySupportAgentIdAndFiledDateAndStatusNot(UUID supportAgentId, LocalDate filedDate, ComplaintStatus status);
 }

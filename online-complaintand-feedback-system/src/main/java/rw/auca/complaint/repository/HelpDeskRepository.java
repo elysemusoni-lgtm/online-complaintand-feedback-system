@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import rw.auca.complaint.model.HelpDesk;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -16,4 +17,7 @@ public interface HelpDeskRepository extends JpaRepository<HelpDesk, UUID> {
             + "WHERE NOT EXISTS (SELECT a FROM SupportAgent a WHERE a.helpDesk = h) "
             + "ORDER BY h.deskNumber")
     List<HelpDesk> findFreeHelpDesks();
+
+    // D4: derived query, find a help desk by its number
+    Optional<HelpDesk> findByDeskNumber(int deskNumber);
 }

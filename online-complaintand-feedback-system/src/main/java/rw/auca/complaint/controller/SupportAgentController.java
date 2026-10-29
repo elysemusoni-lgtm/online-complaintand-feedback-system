@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,6 +36,32 @@ public class SupportAgentController {
     @GetMapping("/all")
     public ResponseEntity<List<SupportAgent>> getAll() {
         return new ResponseEntity<>(supportAgentService.getAll(), HttpStatus.OK);
+    }
+
+    // D3
+    @PutMapping("/{supportAgentId}/issue-types/{issueTypeId}")
+    public ResponseEntity<String> addIssueType(@PathVariable UUID supportAgentId, @PathVariable UUID issueTypeId) {
+        String message = supportAgentService.addIssueType(supportAgentId, issueTypeId);
+        if (message.contains("does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else if (message.contains("already has")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
+    }
+
+    // D4
+    @PatchMapping("/{supportAgentId}/help-desk")
+    public ResponseEntity<String> changeHelpDesk(@PathVariable UUID supportAgentId, @RequestParam int deskNumber) {
+        String message = supportAgentService.changeHelpDesk(supportAgentId, deskNumber);
+        if (message.contains("does not exist")) {
+            return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
+        } else if (message.contains("taken")) {
+            return new ResponseEntity<>(message, HttpStatus.CONFLICT);
+        } else {
+            return new ResponseEntity<>(message, HttpStatus.OK);
+        }
     }
 
     // C1
