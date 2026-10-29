@@ -46,6 +46,19 @@ public class ComplaintController {
         return new ResponseEntity<>(complaintService.getAll(), HttpStatus.OK);
     }
 
+    // F1
+    @GetMapping("/stats/by-status")
+    public ResponseEntity<List<Object[]>> getStatsByStatus() {
+        return new ResponseEntity<>(complaintService.getStatsByStatus(), HttpStatus.OK);
+    }
+
+    // F2
+    @PatchMapping("/cancel-day")
+    public ResponseEntity<String> cancelDay(@RequestParam UUID supportAgentId, @RequestParam String date) {
+        LocalDate day = LocalDate.parse(date);
+        return new ResponseEntity<>(complaintService.cancelDay(supportAgentId, day), HttpStatus.OK);
+    }
+
     // B2
     @GetMapping("/by-status")
     public ResponseEntity<List<Complaint>> getByStatus(@RequestParam ComplaintStatus status) {

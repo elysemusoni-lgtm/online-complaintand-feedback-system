@@ -2,6 +2,7 @@ package rw.auca.complaint.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import rw.auca.complaint.model.Complaint;
 import rw.auca.complaint.model.ComplaintStatus;
 import rw.auca.complaint.repository.ComplaintRepository;
@@ -93,6 +94,19 @@ public class ComplaintService {
         complaint.setStatus(newStatus);
         complaintRepository.save(complaint);
         return "Complaint status updated successfully";
+    }
+
+    // F1
+    public List<Object[]> getStatsByStatus() {
+        return complaintRepository.countByStatus();
+    }
+
+    // F2: support agent is absent
+    @Transactional
+    public String cancelDay(UUID supportAgentId, LocalDate date) {
+        int count = complaintRepository.cancelDay(
+                supportAgentId, date, ComplaintStatus.WITHDRAWN, ComplaintStatus.RESOLVED);
+        return count + " complaints cancelled";
     }
 
     public String delete(UUID id) {
