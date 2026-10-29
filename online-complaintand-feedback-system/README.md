@@ -21,3 +21,4 @@ Built with Spring Boot 3, Spring Data JPA and PostgreSQL (Java 17, Maven).
 - Part B: derived queries (done)
 - Part C: JPQL with joins (done)
 - Part D: business rules (done)
+- Part E: feedback entity (done)

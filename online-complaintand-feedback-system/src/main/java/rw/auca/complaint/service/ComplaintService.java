@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import rw.auca.complaint.model.Complaint;
 import rw.auca.complaint.model.ComplaintStatus;
 import rw.auca.complaint.repository.ComplaintRepository;
+import rw.auca.complaint.repository.FeedbackRepository;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +17,9 @@ public class ComplaintService {
 
     @Autowired
     private ComplaintRepository complaintRepository;
+
+    @Autowired
+    private FeedbackRepository feedbackRepository;
 
     // D1: safe saving
     public String save(Complaint complaint) {
@@ -92,8 +96,13 @@ public class ComplaintService {
     }
 
     public String delete(UUID id) {
-        if (!complaintRepository.existsById(id)) {
+        Optional<Complaint> found = complaintRepository.findById(id);
+        if (found.isEmpty()) {
             return "The complaint with that id does not exist";
+        }
+        // E3: a complaint that has feedbacks cannot be deleted
+        if (feedbackRepository.existsByComplaint(found.get())) {
+            return "That complaint has feedbacks, delete them first";
         }
         complaintRepository.deleteById(id);
         return "Complaint deleted successfully";
