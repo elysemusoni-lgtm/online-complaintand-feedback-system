@@ -1,0 +1,759 @@
+{
+  "info": {
+    "_postman_id": "68b11b7e-be50-494b-852e-e24bdcd36905",
+    "name": "online-complaintand-feedback-system-midterm",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "58561491",
+    "_collection_link": "https://go.postman.co/collection/58561491-68b11b7e-be50-494b-852e-e24bdcd36905?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "A2_Save returns 201 \"Complaint saved successfully Copy",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"filedDate\": \"2026-10-20\", \"status\": \"RESOLVED\", \"subject\": \"Double charge\", \"description\": \"Charged twice for one month\",\r\n \"complainant\": {\"id\": \"f6fa7c03-6118-4a6d-8a32-ffb0c12f8b74\"}, \"supportAgent\": {\"id\": \"191e3f1c-0cb7-4c80-bd6b-dc324277a8f6\"}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2_Get by ID Copy",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"filedDate\": \"2026-11-20\", \"status\": \"OPEN\", \"subject\": \"Double charge\", \"description\": \"Charged twice for one month\",\r\n \"complainant\": {\"id\": \"b8c6d8c0-41de-4197-a04b-85524358f599\"}, \"supportAgent\": {\"id\": \"8ec5ae87-080d-4f16-86d4-34031b7d9124\"}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080 /api/complaints/068c825b-fe64-44c2-962c-3971a8c4bc20",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080 ",
+          "path": [
+            "api",
+            "complaints",
+            "068c825b-fe64-44c2-962c-3971a8c4bc20"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "A2_404 complaint with id not exist Copy",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complainants/by-organisation?organisation=bank of kigali",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complainants",
+            "by-organisation"
+          ],
+          "query": [
+            {
+              "key": "organisation",
+              "value": "bank of kigali"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B1_Find Organisation Copy",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080 /api/complaints/by-status?status=OPEN",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080 ",
+          "path": [
+            "api",
+            "complaints",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "OPEN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B2_Find by status Copy",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/by-status?status=OPEN",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "by-status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "OPEN"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "B3_complaint date in range Copy",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/between?start=2026-10-01&end=2026-10-31",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "between"
+          ],
+          "query": [
+            {
+              "key": "start",
+              "value": "2026-10-01"
+            },
+            {
+              "key": "end",
+              "value": "2026-10-31"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C1_support agents by issue type",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/support-agents/by-issue-type?name=bill",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "support-agents",
+            "by-issue-type"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "bill"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C2_free help desk",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/help-desks/free",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "help-desks",
+            "free"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C3_Issue types nobody holds",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/issue-types/unused",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "issue-types",
+            "unused"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "C4_Complainants of a support agent",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complainants/of-support-agent/191e3f1c-0cb7-4c80-bd6b-dc324277a8f6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complainants",
+            "of-support-agent",
+            "191e3f1c-0cb7-4c80-bd6b-dc324277a8f6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1_Safe Saving",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"filedDate\": \"2025-10-05\", \"status\": \"OPEN\", \"subject\": \"Double charge\", \"description\": \"Charged twice for one month\",\r\n \"complainant\": {\"id\": \"f6fa7c03-6118-4a6d-8a32-ffb0c12f8b74\"}, \"supportAgent\": {\"id\": \"191e3f1c-0cb7-4c80-bd6b-dc324277a8f6\"}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D1_Agent already assigned",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"filedDate\": \"2026-12-01\", \"subject\": \"Double charge\", \"description\": \"Charged twice for one month\",\r\n \"complainant\": {\"id\": \"f6fa7c03-6118-4a6d-8a32-ffb0c12f8b74\"},\r\n \"supportAgent\": {\"id\": \"191e3f1c-0cb7-4c80-bd6b-dc324277a8f6\"}}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/save",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "save"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2_Complaint updated",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/068c825b-fe64-44c2-962c-3971a8c4bc20/status?status=IN_PROGRESS",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "068c825b-fe64-44c2-962c-3971a8c4bc20",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "IN_PROGRESS"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D2_Status Flow",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/e64af6a7-ae4e-4d26-bb8d-0d0a32fdea93/status?status=RESOLVED",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "e64af6a7-ae4e-4d26-bb8d-0d0a32fdea93",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "RESOLVED"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D3_409 error ",
+      "request": {
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/support-agents/8ec5ae87-080d-4f16-86d4-34031b7d9124/issue-types/9d48edcd-7450-48f1-b328-a5220c4f2c76",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "support-agents",
+            "8ec5ae87-080d-4f16-86d4-34031b7d9124",
+            "issue-types",
+            "9d48edcd-7450-48f1-b328-a5220c4f2c76"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4_Help desk changed",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/support-agents/8ec5ae87-080d-4f16-86d4-34031b7d9124/help-desk?deskNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "support-agents",
+            "8ec5ae87-080d-4f16-86d4-34031b7d9124",
+            "help-desk"
+          ],
+          "query": [
+            {
+              "key": "deskNumber",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4_Help desk belongs to another agent",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/support-agents/8ec5ae87-080d-4f16-86d4-34031b7d9124/help-desk?deskNumber=4",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "support-agents",
+            "8ec5ae87-080d-4f16-86d4-34031b7d9124",
+            "help-desk"
+          ],
+          "query": [
+            {
+              "key": "deskNumber",
+              "value": "4"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "D4_Help desk dont exist",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/support-agents/8ec5ae87-080d-4f16-86d4-34031b7d9124/help-desk?deskNumber=9",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "support-agents",
+            "8ec5ae87-080d-4f16-86d4-34031b7d9124",
+            "help-desk"
+          ],
+          "query": [
+            {
+              "key": "deskNumber",
+              "value": "9"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E1_Written feedback",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"outcome\": \"Satisfied\", \"comment\": \"Given another product\", \"rating\": 4}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/feedbacks/save?complaintId=531131c7-4040-4aff-b445-019585e1209b",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "feedbacks",
+            "save"
+          ],
+          "query": [
+            {
+              "key": "complaintId",
+              "value": "531131c7-4040-4aff-b445-019585e1209b"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E2_Feedback history of complainant",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/feedbacks/complainant/grace.u@example.com",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "feedbacks",
+            "complainant",
+            "grace.u@example.com"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "E3_Delete Feedback",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/feedbacks/delete/59f357eb-0916-4f74-ae6c-37d185137315",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "feedbacks",
+            "delete",
+            "59f357eb-0916-4f74-ae6c-37d185137315"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F1_Complaints per status",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/stats/by-status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "stats",
+            "by-status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "F2_Support agent cancelled",
+      "request": {
+        "method": "PATCH",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/cancel-day?supportAgentId=191e3f1c-0cb7-4c80-bd6b-dc324277a8f6&date=2026-11-11",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "cancel-day"
+          ],
+          "query": [
+            {
+              "key": "supportAgentId",
+              "value": "191e3f1c-0cb7-4c80-bd6b-dc324277a8f6"
+            },
+            {
+              "key": "date",
+              "value": "2026-11-11"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Bonus_Online Complaint and Feedback System dashboard",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/dashboard/summary",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "dashboard",
+            "summary"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "BONUS_Complaints page by page",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/complaints/page?page=0&size=5&sort=filedDate,desc",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "complaints",
+            "page"
+          ],
+          "query": [
+            {
+              "key": "page",
+              "value": "0"
+            },
+            {
+              "key": "size",
+              "value": "5"
+            },
+            {
+              "key": "sort",
+              "value": "filedDate,desc"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
