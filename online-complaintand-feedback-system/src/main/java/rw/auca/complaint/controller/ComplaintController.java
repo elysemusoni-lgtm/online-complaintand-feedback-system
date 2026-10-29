@@ -1,6 +1,10 @@
 package rw.auca.complaint.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,6 +48,20 @@ public class ComplaintController {
     @GetMapping("/all")
     public ResponseEntity<List<Complaint>> getAll() {
         return new ResponseEntity<>(complaintService.getAll(), HttpStatus.OK);
+    }
+
+    // Bonus: complaints page by page, the Pageable is built here from the three parameters
+    @GetMapping("/page")
+    public ResponseEntity<Page<Complaint>> getPage(@RequestParam(defaultValue = "0") int page,
+                                                   @RequestParam(defaultValue = "5") int size,
+                                                   @RequestParam(defaultValue = "filedDate,asc") String sort) {
+        String[] parts = sort.split(",");
+        Sort.Direction direction = Sort.Direction.ASC;
+        if (parts.length > 1 && parts[1].equalsIgnoreCase("desc")) {
+            direction = Sort.Direction.DESC;
+        }
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, parts[0]));
+        return new ResponseEntity<>(complaintService.getPage(pageable), HttpStatus.OK);
     }
 
     // F1

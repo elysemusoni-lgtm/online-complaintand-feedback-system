@@ -1,6 +1,8 @@
 package rw.auca.complaint.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rw.auca.complaint.model.Complaint;
@@ -96,9 +98,14 @@ public class ComplaintService {
         return "Complaint status updated successfully";
     }
 
+    // Bonus: complaints page by page
+    public Page<Complaint> getPage(Pageable pageable) {
+        return complaintRepository.findAll(pageable);
+    }
+
     // F1
     public List<Object[]> getStatsByStatus() {
-        return complaintRepository.countByStatus();
+        return complaintRepository.countPerStatus();
     }
 
     // F2: support agent is absent

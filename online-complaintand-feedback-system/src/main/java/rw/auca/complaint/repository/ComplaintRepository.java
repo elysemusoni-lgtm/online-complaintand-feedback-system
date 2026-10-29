@@ -26,7 +26,12 @@ public interface ComplaintRepository extends JpaRepository<Complaint, UUID> {
 
     // F1: JPQL, one row per status with its count, a status with zero complaints does not appear
     @Query("SELECT c.status, COUNT(c) FROM Complaint c GROUP BY c.status")
-    List<Object[]> countByStatus();
+    List<Object[]> countPerStatus();
+
+    // Bonus dashboard: derived countBy queries
+    long countByFiledDate(LocalDate filedDate);
+
+    long countByStatus(ComplaintStatus status);
 
     // F2: JPQL UPDATE, withdraw every complaint of a support agent on a date except RESOLVED ones
     @Modifying

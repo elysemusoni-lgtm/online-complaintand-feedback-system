@@ -23,3 +23,4 @@ Built with Spring Boot 3, Spring Data JPA and PostgreSQL (Java 17, Maven).
 - Part D: business rules (done)
 - Part E: feedback entity (done)
 - Part F: reports and bulk updates (done)
+- Bonus: dashboard summary and complaints page (done)
